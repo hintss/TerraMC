@@ -1,0 +1,66 @@
+author: LordSaad44
+description: TerraMC commands and utilities.
+main: me.LordSaad44.terramc.Main
+name: TerraMC
+version: 1.0
+commands:
+  gamemode:
+    description: change gamemode
+    aliases: gm
+    usage: /gamemode [0|1|2|creative|survival|adventure]
+  heal:
+    description: heal yourself
+    permission: terra.heal
+    usage: /heal
+  feed:
+    description: feed yourself
+    permission: terra.feed
+    usage: /feed
+  throwme:
+    description: throw yourself
+    permission: terra.throwme
+    usage: /throwme
+  god:
+    description: become invincible
+    permission: terra.god
+    usage: /god
+  fly:
+    description: fly in survival
+    permission: terra.fly
+    usage: /fly
+  help:
+    description: shows the help page
+    usage: /help
+  help information:
+    description: shows the information page
+    usage: /help information
+  rockpaperscissors:
+    description: play rock paper scissors with the computer.
+    usage: /rockpaperscissors
+  rps:
+    description: play rock paper scissors with the computer.
+    usage: /rps
+  rock:
+    description: choose rock in rock paper scissors.
+    usage: /rock
+  paper:
+    description: choose paper in rock paper scissors.
+    usage: /paper
+  scissors:
+    description: choose scissors in rock paper scissors.
+    usage: /scissors
+  flap:
+    description: Flap!
+    usage: /flap
+  setspawn:
+    description: Set the spawn point.
+    usage: /setspawn
+  spawn:
+    description: Teleport to the spawn point.
+    usage: /spawn
+  spawngui:
+    description: opens spawn gui
+    usage: /spawngui
+  autojump:
+    description: auto jump!
+    usage: /autojump

@@ -2,7 +2,13 @@ package me.LordSaad44.terramc;
 
 import net.milkbowl.vault.economy.Economy;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
+import org.bukkit.Location;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,7 +17,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class Main extends JavaPlugin implements Listener {
+public class Main extends JavaPlugin implements Listener, CommandExecutor {
 
 	public static Economy econ = null;
 
@@ -64,8 +70,6 @@ public class Main extends JavaPlugin implements Listener {
 		getCommand("help").setExecutor(new HelpPage());
 		getCommand("throwme").setExecutor(new FunCmds());
 		getCommand("autojump").setExecutor(new FunCmds());
-		getCommand("setspawn").setExecutor(new Spawn());
-		getCommand("spawn").setExecutor(new Spawn());
 		getCommand("fly").setExecutor(new Fly());
 	}
 
@@ -175,5 +179,60 @@ public class Main extends JavaPlugin implements Listener {
 						p.sendMessage(" ");
 					}
 				}, 10L);
+	}
+
+	// SPAWN STUFF
+	@SuppressWarnings("deprecation")
+	public boolean onCommand(CommandSender sender, Command cmd, String label,
+			String[] args) {
+		Player p = (Player) sender;
+		if (cmd.getName().equalsIgnoreCase("setspawn")) {
+			if (sender instanceof Player) {
+				if (args.length == 0) {
+					if (sender.hasPermission("terra.setspawn")) {
+						double x = ((Player) sender).getLocation().getX();
+						double y = ((Player) sender).getLocation().getY();
+						double z = ((Player) sender).getLocation().getZ();
+						this.getConfig().set("X", x);
+						this.getConfig().set("Y", y);
+						this.getConfig().set("Z", z);
+						p.sendMessage(ChatColor.GRAY + "Spawn Set!");
+						p.playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 0);
+
+					} else {
+						sender.sendMessage(ChatColor.RED + "Nope...");
+					}
+				} else {
+					sender.sendMessage(ChatColor.RED + "Too many arguments");
+				}
+			} else {
+				sender.sendMessage(ChatColor.RED
+						+ "Only players can do this, you silly console!");
+			}
+
+			if (cmd.getName().equalsIgnoreCase("spawn")) {
+				if (sender instanceof Player) {
+					if (args.length == 0) {
+						if (sender.hasPermission("terra.spawn")) {
+							double xc = this.getConfig().getDouble("X");
+							double yc = this.getConfig().getDouble("Y");
+							double zc = this.getConfig().getDouble("Z");
+							((Player) sender).teleport(new Location(Bukkit
+									.getWorld("potato"), xc, yc, zc));
+							p.sendMessage(ChatColor.GREEN
+									+ "You have been teleported to the spawn.");
+						} else {
+							sender.sendMessage(ChatColor.RED + "Nope...");
+						}
+					} else {
+						sender.sendMessage(ChatColor.RED + "Too many arguments");
+					}
+				} else {
+					sender.sendMessage(ChatColor.RED
+							+ "Only players can do this, you silly console!");
+				}
+			}
+		}
+		return true;
 	}
 }

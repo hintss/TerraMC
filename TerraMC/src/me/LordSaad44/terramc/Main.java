@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -190,13 +191,14 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 			if (sender instanceof Player) {
 				if (args.length == 0) {
 					if (sender.hasPermission("terra.setspawn")) {
-						double x = ((Player) sender).getLocation().getX();
-						double y = ((Player) sender).getLocation().getY();
-						double z = ((Player) sender).getLocation().getZ();
-						this.getConfig().set("X", x);
-						this.getConfig().set("Y", y);
-						this.getConfig().set("Z", z);
+						int X = ((Player) sender).getLocation().getBlockX();
+						int Y = ((Player) sender).getLocation().getBlockY();
+						int Z = ((Player) sender).getLocation().getBlockZ();
+
+						Bukkit.getWorld("potato").setSpawnLocation(X, Y, Z);
 						p.sendMessage(ChatColor.GRAY + "Spawn Set!");
+						p.sendMessage(ChatColor.GRAY + "coordinates: " + X
+								+ ", " + Y + ", " + Z);
 						p.playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 0);
 
 					} else {
@@ -209,28 +211,37 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 				sender.sendMessage(ChatColor.RED
 						+ "Only players can do this, you silly console!");
 			}
+		}
 
-			if (cmd.getName().equalsIgnoreCase("spawn")) {
-				if (sender instanceof Player) {
-					if (args.length == 0) {
-						if (sender.hasPermission("terra.spawn")) {
-							double xc = this.getConfig().getDouble("X");
-							double yc = this.getConfig().getDouble("Y");
-							double zc = this.getConfig().getDouble("Z");
-							((Player) sender).teleport(new Location(Bukkit
-									.getWorld("potato"), xc, yc, zc));
-							p.sendMessage(ChatColor.GREEN
-									+ "You have been teleported to the spawn.");
-						} else {
-							sender.sendMessage(ChatColor.RED + "Nope...");
-						}
+		if (cmd.getName().equalsIgnoreCase("spawn")) {
+			if (sender instanceof Player) {
+				if (args.length == 0) {
+					if (sender.hasPermission("terra.spawn")) {
+
+						int X = Bukkit.getWorld("potato").getSpawnLocation()
+								.getBlockX();
+						int Y = Bukkit.getWorld("potato").getSpawnLocation()
+								.getBlockY();
+						int Z = Bukkit.getWorld("potato").getSpawnLocation()
+								.getBlockZ();
+
+						Location location = new Location(
+								Bukkit.getWorld("potato"), X, Y, Z);
+						p.teleport(location);
+						p.sendMessage(ChatColor.GREEN
+								+ "You have been teleported to the spawn.");
+						p.playEffect(p.getLocation(), Effect.ENDER_SIGNAL, 0);
+						p.playSound(p.getLocation(), Sound.ENDERMAN_TELEPORT,
+								10, 2);
 					} else {
-						sender.sendMessage(ChatColor.RED + "Too many arguments");
+						sender.sendMessage(ChatColor.RED + "Nope...");
 					}
 				} else {
-					sender.sendMessage(ChatColor.RED
-							+ "Only players can do this, you silly console!");
+					sender.sendMessage(ChatColor.RED + "Too many arguments");
 				}
+			} else {
+				sender.sendMessage(ChatColor.RED
+						+ "Only players can do this, you silly console!");
 			}
 		}
 		return true;

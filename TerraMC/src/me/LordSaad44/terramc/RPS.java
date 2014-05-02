@@ -35,7 +35,7 @@ public class RPS implements CommandExecutor {
 						int numrock = 1 + dicerock.nextInt(maxrock);
 
 						if (numrock == 1) {
-
+							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GRAY
 									+ "Computer's choice:" + ChatColor.BLUE
 									+ " Rock");
@@ -43,9 +43,10 @@ public class RPS implements CommandExecutor {
 									+ ChatColor.BLUE + "         Rock");
 							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GREEN + "It's a tie!");
+							sender.sendMessage(" ");
 
 						} else if (numrock == 2) {
-
+							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GRAY
 									+ "Computer's choice:" + ChatColor.BLUE
 									+ " Paper");
@@ -54,6 +55,7 @@ public class RPS implements CommandExecutor {
 							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GREEN
 									+ "Computer wins!");
+							sender.sendMessage(" ");
 
 						} else if (numrock == 3) {
 
@@ -64,6 +66,7 @@ public class RPS implements CommandExecutor {
 									+ ChatColor.BLUE + "         Rock");
 							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GREEN + "You win!");
+							sender.sendMessage(" ");
 						}
 					}
 
@@ -77,7 +80,7 @@ public class RPS implements CommandExecutor {
 						int numpaper = 1 + dicepaper.nextInt(maxpaper);
 
 						if (numpaper == 1) {
-
+							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GRAY
 									+ "Computer's choice:" + ChatColor.BLUE
 									+ " Paper");
@@ -85,9 +88,10 @@ public class RPS implements CommandExecutor {
 									+ ChatColor.BLUE + "         Paper");
 							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GREEN + "It's a tie!");
+							sender.sendMessage(" ");
 
 						} else if (numpaper == 2) {
-
+							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GRAY
 									+ "Computer's choice:" + ChatColor.BLUE
 									+ " Scissors");
@@ -96,9 +100,10 @@ public class RPS implements CommandExecutor {
 							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GREEN
 									+ "Computer wins!");
+							sender.sendMessage(" ");
 
 						} else if (numpaper == 3) {
-
+							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GRAY
 									+ "Computer's choice:" + ChatColor.BLUE
 									+ " Rock");
@@ -106,6 +111,7 @@ public class RPS implements CommandExecutor {
 									+ ChatColor.BLUE + "         Paper");
 							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GREEN + "You win!");
+							sender.sendMessage(" ");
 						}
 					}
 
@@ -119,7 +125,7 @@ public class RPS implements CommandExecutor {
 						int numscis = 1 + dicescis.nextInt(maxscis);
 
 						if (numscis == 1) {
-
+							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GRAY
 									+ "Computer's choice:" + ChatColor.BLUE
 									+ " Scissors");
@@ -127,9 +133,10 @@ public class RPS implements CommandExecutor {
 									+ ChatColor.BLUE + "         Scissors");
 							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GREEN + "It's a tie!");
+							sender.sendMessage(" ");
 
 						} else if (numscis == 2) {
-
+							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GRAY
 									+ "Computer's choice:" + ChatColor.BLUE
 									+ " Rock");
@@ -138,9 +145,10 @@ public class RPS implements CommandExecutor {
 							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GREEN
 									+ "Computer wins!");
+							sender.sendMessage(" ");
 
 						} else if (numscis == 3) {
-
+							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GRAY
 									+ "Computer's choice:" + ChatColor.BLUE
 									+ " Paper");
@@ -148,6 +156,7 @@ public class RPS implements CommandExecutor {
 									+ ChatColor.BLUE + "         Scissors");
 							sender.sendMessage(" ");
 							sender.sendMessage(ChatColor.GREEN + "You win!");
+							sender.sendMessage(" ");
 						}
 					}
 

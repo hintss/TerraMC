@@ -15,6 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -60,6 +61,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 	public void RegisterCommands() {
 		getCommand("gamemode").setExecutor(new Gamemode());
 		getCommand("spawngui").setExecutor(new InventoryGuis());
+		getCommand("trails").setExecutor(new InventoryGuis());
 		getCommand("flap").setExecutor(new FlapFly());
 		getCommand("rps").setExecutor(new RPS());
 		getCommand("rockpaperscissors").setExecutor(new RPS());
@@ -180,6 +182,19 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 						p.sendMessage(" ");
 					}
 				}, 10L);
+	}
+
+	// MULTIPLAYER MENU MOTD
+
+	@EventHandler
+	public void ping(ServerListPingEvent event) {
+		event.setMotd(ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "*"
+				+ ChatColor.DARK_GRAY + "]" + ChatColor.AQUA
+				+ ChatColor.STRIKETHROUGH + "--------" + ChatColor.DARK_GRAY
+				+ "[" + ChatColor.GREEN + " TerraMC " + ChatColor.DARK_GRAY
+				+ "]" + ChatColor.AQUA + ChatColor.STRIKETHROUGH + "--------"
+				+ ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "*"
+				+ ChatColor.DARK_GRAY + "]");
 	}
 
 	// SPAWN STUFF

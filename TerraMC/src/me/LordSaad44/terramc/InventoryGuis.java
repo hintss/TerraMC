@@ -7,7 +7,9 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Egg;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -19,8 +21,11 @@ public class InventoryGuis implements Listener, CommandExecutor {
 
 	public static Inventory SpawnInv = Bukkit.createInventory(null, 27,
 			ChatColor.BLACK + "              Spawn Gui");
+	public static Inventory Trails = Bukkit.createInventory(null, 9,
+			ChatColor.BLACK + "               Trails");
 	static {
 		SpawnInv.setItem(13, new ItemStack(Material.COMPASS, 1));
+		Trails.setItem(5, new ItemStack(Material.FEATHER, 1));
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label,
@@ -32,16 +37,33 @@ public class InventoryGuis implements Listener, CommandExecutor {
 
 						((Player) sender).openInventory(SpawnInv);
 
+					} else {
+						sender.sendMessage(ChatColor.RED + "Nope...");
 					}
 				} else {
-					sender.sendMessage(ChatColor.RED + "Nope...");
+					sender.sendMessage(ChatColor.RED + "Too many arguments");
 				}
 			} else {
-				sender.sendMessage(ChatColor.RED + "Too many arguments");
+				sender.sendMessage(ChatColor.RED
+						+ "Only players can do this, you silly console!");
 			}
-		} else {
-			sender.sendMessage(ChatColor.RED
-					+ "Only players can do this, you silly console!");
+		} else if (cmd.getName().equalsIgnoreCase("trails")) {
+			if (sender instanceof Player) {
+				if (args.length == 0) {
+					if (sender.hasPermission("terra.trails")) {
+
+						((Player) sender).openInventory(Trails);
+
+					} else {
+						sender.sendMessage(ChatColor.RED + "Nope...");
+					}
+				} else {
+					sender.sendMessage(ChatColor.RED + "Too many arguments");
+				}
+			} else {
+				sender.sendMessage(ChatColor.RED
+						+ "Only players can do this, you silly console!");
+			}
 		}
 		return true;
 	}
@@ -51,9 +73,20 @@ public class InventoryGuis implements Listener, CommandExecutor {
 		Player player = event.getPlayer();
 		if (player.getItemInHand() != null) {
 			ItemStack item = player.getItemInHand();
+
 			if (item.getType() == Material.DIAMOND_SPADE) {
 
 				player.openInventory(SpawnInv);
+
+			} else if (item.getType() == Material.PAPER) {
+
+				player.openInventory(Trails);
+
+			} else if (item.getType() == Material.STICK) {
+
+				Projectile egg = event.getPlayer().launchProjectile(Egg.class);
+				egg.setVelocity(event.getPlayer().getLocation().getDirection()
+						.multiply(1).setY(0.5));
 			}
 		}
 	}
@@ -69,6 +102,11 @@ public class InventoryGuis implements Listener, CommandExecutor {
 				event.setCancelled(true);
 				player.teleport(new Location(Bukkit.getWorld("potato"), 215.99,
 						77, 151.95));
+			}
+		} else if (inventory.getName().equals(Trails.getName())) {
+			if (clicked.getType() == Material.FEATHER) {
+				event.setCancelled(true);
+				player.getInventory().addItem(new ItemStack(Material.STICK, 1));
 			}
 		}
 	}

@@ -61,6 +61,9 @@ commands:
   spawngui:
     description: opens spawn gui
     usage: /spawngui
+  trails:
+    description: opens trail gui
+    usage: /trails
   autojump:
     description: auto jump!
     usage: /autojump

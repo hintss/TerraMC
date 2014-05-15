@@ -27,21 +27,7 @@ public class Locations {
 			for (Map.Entry<String, Warp> entry : List.entrySet()) {
 				Location l = entry.getValue().loc;
 				String name = entry.getValue().fullName;
-				StringBuilder builder = new StringBuilder();
-				builder.append(name);
-				builder.append(':');
-				builder.append(l.getX());
-				builder.append(':');
-				builder.append(l.getY());
-				builder.append(':');
-				builder.append(l.getZ());
-				builder.append(':');
-				builder.append(l.getYaw());
-				builder.append(':');
-				builder.append(entry.getValue().world);
-				builder.append(':');
-				builder.append(entry.getValue().cost);
-				bw.append(builder.toString());
+				bw.append(name + ":" + l.getX() + ":" + l.getY() + ":" + l.getZ() + ":" l.getYaw() + ":" + entry.getValue().world + ":" + entry.getValue().cost);
 				bw.newLine();
 			}
 			bw.close();
@@ -52,11 +38,10 @@ public class Locations {
 
 	public static void loadList(String locFile, HashMap<String, Warp> List,
 			HashMap<String, World> worldList, World defWorld) {
-		Scanner scanner = null;
+		Scanner scanner;
 		try {
 			scanner = new Scanner(new FileReader(locFile));
 			while (scanner.hasNextLine()) {
-
 				String[] elements = scanner.nextLine().split(":");
 				if (elements.length < 6) {
 					continue;

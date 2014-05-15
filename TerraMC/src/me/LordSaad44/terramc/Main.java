@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.logging.Logger;
 
-import me.LordSaad44.terramc.WarpAndHome.pListener;
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.Bukkit;
@@ -23,7 +22,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.server.ServerListPingEvent;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -31,9 +29,6 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 
 	public static Logger log;
 	public static Server server;
-	private PluginManager pm;
-	@SuppressWarnings("unused")
-	private FileConfiguration newConfig;
 	private HashMap<String, World> worldList = new HashMap<String, World>();
 
 	private String warpFile;
@@ -117,10 +112,6 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 
 	public void WarpAndHome() {
 
-		log = Logger.getLogger("Minecraft");
-		pm = getServer().getPluginManager();
-		newConfig = getConfig();
-
 		if (!getDataFolder().exists())
 			getDataFolder().mkdirs();
 		warpFile = getDataFolder().getPath() + File.separator + "warps.db";
@@ -152,7 +143,6 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 		Locations.loadList(homeFile, Locations.homes, worldList, defWorld);
 		Locations.updateList();
 
-		pm.registerEvents(new pListener(), this);
 	}
 
 	public void OnEnableMessage() {

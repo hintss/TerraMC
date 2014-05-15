@@ -23,142 +23,115 @@ public class RPS implements CommandExecutor {
 
 						sender.sendMessage(ChatColor.GREEN
 								+ "Do you choose rock, paper, or scissors?");
-					}
-
-					// ROCK
-					if (cmd.getName().equalsIgnoreCase("rock")) {
-
-						Random dicerock = new Random();
-						int maxrock = 3;
-						int minrock = 1;
-						int numrock = 1 + dicerock.nextInt(maxrock);
-
-						if (numrock == 1) {
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GRAY
-									+ "Computer's choice:" + ChatColor.BLUE
-									+ " Rock");
-							sender.sendMessage(ChatColor.GRAY + "Your choice:"
-									+ ChatColor.BLUE + "         Rock");
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GREEN + "It's a tie!");
-							sender.sendMessage(" ");
-
-						} else if (numrock == 2) {
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GRAY
-									+ "Computer's choice:" + ChatColor.BLUE
-									+ " Paper");
-							sender.sendMessage(ChatColor.GRAY + "Your choice:"
-									+ ChatColor.BLUE + "         Rock");
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GREEN
-									+ "Computer wins!");
-							sender.sendMessage(" ");
-
-						} else if (numrock == 3) {
-
-							sender.sendMessage(ChatColor.GRAY
-									+ "Computer's choice:" + ChatColor.BLUE
-									+ " Scissors");
-							sender.sendMessage(ChatColor.GRAY + "Your choice:"
-									+ ChatColor.BLUE + "         Rock");
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GREEN + "You win!");
-							sender.sendMessage(" ");
+					} else {
+						int num = new Random().nextInt(3);
+						
+						if (cmd.getName().equalsIgnoreCase("rock")) {
+							if (num == 0) {
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GRAY
+										+ "Computer's choice:" + ChatColor.BLUE
+										+ " Rock");
+								sender.sendMessage(ChatColor.GRAY + "Your choice:"
+										+ ChatColor.BLUE + "         Rock");
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GREEN + "It's a tie!");
+								sender.sendMessage(" ");
+	
+							} else if (num == 1) {
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GRAY
+										+ "Computer's choice:" + ChatColor.BLUE
+										+ " Paper");
+								sender.sendMessage(ChatColor.GRAY + "Your choice:"
+										+ ChatColor.BLUE + "         Rock");
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GREEN
+										+ "Computer wins!");
+								sender.sendMessage(" ");
+	
+							} else if (num == 2) {
+								sender.sendMessage(ChatColor.GRAY
+										+ "Computer's choice:" + ChatColor.BLUE
+										+ " Scissors");
+								sender.sendMessage(ChatColor.GRAY + "Your choice:"
+										+ ChatColor.BLUE + "         Rock");
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GREEN + "You win!");
+								sender.sendMessage(" ");
+							}
+						} else if (cmd.getName().equalsIgnoreCase("paper")) {
+							if (num == 0) {
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GRAY
+										+ "Computer's choice:" + ChatColor.BLUE
+										+ " Paper");
+								sender.sendMessage(ChatColor.GRAY + "Your choice:"
+										+ ChatColor.BLUE + "         Paper");
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GREEN + "It's a tie!");
+								sender.sendMessage(" ");
+	
+							} else if (num == 1) {
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GRAY
+										+ "Computer's choice:" + ChatColor.BLUE
+										+ " Scissors");
+								sender.sendMessage(ChatColor.GRAY + "Your choice:"
+										+ ChatColor.BLUE + "         Paper");
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GREEN
+										+ "Computer wins!");
+								sender.sendMessage(" ");
+	
+							} else if (num == 2) {
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GRAY
+										+ "Computer's choice:" + ChatColor.BLUE
+										+ " Rock");
+								sender.sendMessage(ChatColor.GRAY + "Your choice:"
+										+ ChatColor.BLUE + "         Paper");
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GREEN + "You win!");
+								sender.sendMessage(" ");
+							}
+						} else if (cmd.getName().equalsIgnoreCase("scissors")) {
+							if (num == 0) {
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GRAY
+										+ "Computer's choice:" + ChatColor.BLUE
+										+ " Scissors");
+								sender.sendMessage(ChatColor.GRAY + "Your choice:"
+										+ ChatColor.BLUE + "         Scissors");
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GREEN + "It's a tie!");
+								sender.sendMessage(" ");
+	
+							} else if (num == 1) {
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GRAY
+										+ "Computer's choice:" + ChatColor.BLUE
+										+ " Rock");
+								sender.sendMessage(ChatColor.GRAY + "Your choice:"
+										+ ChatColor.BLUE + "         Scissors");
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GREEN
+										+ "Computer wins!");
+								sender.sendMessage(" ");
+	
+							} else if (num == 2) {
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GRAY
+										+ "Computer's choice:" + ChatColor.BLUE
+										+ " Paper");
+								sender.sendMessage(ChatColor.GRAY + "Your choice:"
+										+ ChatColor.BLUE + "         Scissors");
+								sender.sendMessage(" ");
+								sender.sendMessage(ChatColor.GREEN + "You win!");
+								sender.sendMessage(" ");
+							}
 						}
 					}
-
-					// PAPER
-					if (cmd.getName().equalsIgnoreCase("paper")) {
-
-						Random dicepaper = new Random();
-						int maxpaper = 3;
-						int minpaper = 1;
-						int counterpaper = minpaper;
-						int numpaper = 1 + dicepaper.nextInt(maxpaper);
-
-						if (numpaper == 1) {
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GRAY
-									+ "Computer's choice:" + ChatColor.BLUE
-									+ " Paper");
-							sender.sendMessage(ChatColor.GRAY + "Your choice:"
-									+ ChatColor.BLUE + "         Paper");
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GREEN + "It's a tie!");
-							sender.sendMessage(" ");
-
-						} else if (numpaper == 2) {
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GRAY
-									+ "Computer's choice:" + ChatColor.BLUE
-									+ " Scissors");
-							sender.sendMessage(ChatColor.GRAY + "Your choice:"
-									+ ChatColor.BLUE + "         Paper");
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GREEN
-									+ "Computer wins!");
-							sender.sendMessage(" ");
-
-						} else if (numpaper == 3) {
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GRAY
-									+ "Computer's choice:" + ChatColor.BLUE
-									+ " Rock");
-							sender.sendMessage(ChatColor.GRAY + "Your choice:"
-									+ ChatColor.BLUE + "         Paper");
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GREEN + "You win!");
-							sender.sendMessage(" ");
-						}
-					}
-
-					// SCISSORS
-					if (cmd.getName().equalsIgnoreCase("scissors")) {
-
-						Random dicescis = new Random();
-						int maxscis = 3;
-						int minscis = 1;
-						int counterscis = minscis;
-						int numscis = 1 + dicescis.nextInt(maxscis);
-
-						if (numscis == 1) {
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GRAY
-									+ "Computer's choice:" + ChatColor.BLUE
-									+ " Scissors");
-							sender.sendMessage(ChatColor.GRAY + "Your choice:"
-									+ ChatColor.BLUE + "         Scissors");
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GREEN + "It's a tie!");
-							sender.sendMessage(" ");
-
-						} else if (numscis == 2) {
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GRAY
-									+ "Computer's choice:" + ChatColor.BLUE
-									+ " Rock");
-							sender.sendMessage(ChatColor.GRAY + "Your choice:"
-									+ ChatColor.BLUE + "         Scissors");
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GREEN
-									+ "Computer wins!");
-							sender.sendMessage(" ");
-
-						} else if (numscis == 3) {
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GRAY
-									+ "Computer's choice:" + ChatColor.BLUE
-									+ " Paper");
-							sender.sendMessage(ChatColor.GRAY + "Your choice:"
-									+ ChatColor.BLUE + "         Scissors");
-							sender.sendMessage(" ");
-							sender.sendMessage(ChatColor.GREEN + "You win!");
-							sender.sendMessage(" ");
-						}
-					}
-
 				} else {
 					sender.sendMessage(ChatColor.RED + "Too many arguments");
 				}

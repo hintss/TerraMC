@@ -99,15 +99,15 @@ public class InventoryGuis implements Listener, CommandExecutor {
 
 		if (inventory.getName().equals(SpawnInv.getName())) {
 			if (clicked.getType() == Material.COMPASS) {
-				event.setCancelled(true);
 				player.teleport(new Location(Bukkit.getWorld("potato"), 215.99,
 						77, 151.95));
 			}
+			event.setCancelled(true);
 		} else if (inventory.getName().equals(Trails.getName())) {
 			if (clicked.getType() == Material.FEATHER) {
-				event.setCancelled(true);
 				player.getInventory().addItem(new ItemStack(Material.STICK, 1));
 			}
+			event.setCancelled(true);
 		}
 	}
 }

@@ -109,7 +109,7 @@ public class Locations {
 	}
 
 	public static void addHome(Location loc, String name) {
-		Locations.homes.put(name.toLowerCase(), new Warp(name, loc, -1));
+		Locations.homes.put(name.toLowerCase(), new Warp(name, loc));
 	}
 
 	public static boolean removeHome(String name) {
@@ -175,10 +175,10 @@ public class Locations {
 		public String fullName;
 		public String world;
 		public Location loc;
-		public double cost;
+		public double cost = 0;
 
 		Warp(String fullName, String world, Location loc) {
-			this(fullName, world, loc, -1);
+			this(fullName, world, loc, 0);
 		}
 
 		Warp(String fullName, String world, Location loc, double cost) {

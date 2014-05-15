@@ -27,7 +27,9 @@ public class Locations {
 			for (Map.Entry<String, Warp> entry : List.entrySet()) {
 				Location l = entry.getValue().loc;
 				String name = entry.getValue().fullName;
-				bw.append(name + ":" + l.getX() + ":" + l.getY() + ":" + l.getZ() + ":" l.getYaw() + ":" + entry.getValue().world + ":" + entry.getValue().cost);
+				bw.append(name + ":" + l.getX() + ":" + l.getY() + ":"
+						+ l.getZ() + ":" + String.valueOf(l.getYaw()) + ":"
+						+ entry.getValue().world + ":" + entry.getValue().cost);
 				bw.newLine();
 			}
 			bw.close();
@@ -38,7 +40,7 @@ public class Locations {
 
 	public static void loadList(String locFile, HashMap<String, Warp> List,
 			HashMap<String, World> worldList, World defWorld) {
-		Scanner scanner;
+		Scanner scanner = null;
 		try {
 			scanner = new Scanner(new FileReader(locFile));
 			while (scanner.hasNextLine()) {
@@ -126,8 +128,8 @@ public class Locations {
 		return warp.loc;
 	}
 
-	public static void addWarp(Location loc, String name, double cost) {
-		Locations.warps.put(name.toLowerCase(), new Warp(name, loc, cost));
+	public static void addWarp(Location loc, String name) {
+		Locations.warps.put(name.toLowerCase(), new Warp(name, loc));
 		Locations.updateList();
 	}
 
@@ -186,13 +188,12 @@ public class Locations {
 			this.cost = cost;
 		}
 
-		Warp(String fullName, Location loc, double cost) {
+		Warp(String fullName, Location loc) {
 			this.fullName = fullName;
 			this.loc = loc;
 			this.world = "";
 			if (this.loc.getWorld() != null)
 				this.world = this.loc.getWorld().getName();
-			this.cost = cost;
 		}
 	}
 }

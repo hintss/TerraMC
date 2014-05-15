@@ -1,12 +1,19 @@
 package me.LordSaad44.terramc;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.logging.Logger;
+
+import me.LordSaad44.terramc.WarpAndHome.pListener;
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Server;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,14 +23,27 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.server.ServerListPingEvent;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener, CommandExecutor {
 
+	public static Logger log;
+	public static Server server;
+	private PluginManager pm;
+	@SuppressWarnings("unused")
+	private FileConfiguration newConfig;
+	private HashMap<String, World> worldList = new HashMap<String, World>();
+
+	private String warpFile;
+	private String homeFile;
+	private World defWorld;
+
 	public static Economy econ = null;
 
 	private boolean setupEconomy() {
+
 		if (getServer().getPluginManager().getPlugin("Vault") == null) {
 			return false;
 		}
@@ -37,6 +57,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 	}
 
 	private void initialiseConfig() {
+
 		final FileConfiguration config = this.getConfig();
 		config.addDefault("world", "potato");
 		config.addDefault("X", 0.0);
@@ -47,6 +68,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 	}
 
 	public void RegisterEvents() {
+
 		getServer().getPluginManager().registerEvents(this, this);
 		getServer().getPluginManager().registerEvents(new DoubleJump(), this);
 		getServer().getPluginManager().registerEvents(new JoinLeaveMessages(),
@@ -59,6 +81,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 	}
 
 	public void RegisterCommands() {
+
 		getCommand("gamemode").setExecutor(new Gamemode());
 		getCommand("spawngui").setExecutor(new InventoryGuis());
 		getCommand("trails").setExecutor(new InventoryGuis());
@@ -77,6 +100,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 	}
 
 	public void RegisterOthers() {
+
 		HealFeedGod blah = new HealFeedGod();
 		getServer().getPluginManager().registerEvents(blah, this);
 		getCommand("god").setExecutor(blah);
@@ -89,6 +113,46 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 					getDescription().getName()));
 			getServer().getPluginManager().disablePlugin(this);
 		}
+	}
+
+	public void WarpAndHome() {
+
+		log = Logger.getLogger("Minecraft");
+		pm = getServer().getPluginManager();
+		newConfig = getConfig();
+
+		if (!getDataFolder().exists())
+			getDataFolder().mkdirs();
+		warpFile = getDataFolder().getPath() + File.separator + "warps.db";
+		homeFile = getDataFolder().getPath() + File.separator + "homes.db";
+		server = getServer();
+		reloadConfig();
+
+		for (World w : getServer().getWorlds()) {
+			worldList.put(w.getName(), w);
+		}
+		defWorld = getServer().getWorlds().get(0);
+
+		File oldFile = new File(warpFile.substring(0, warpFile.length() - 2)
+				+ "txt");
+		File newFile = new File(warpFile);
+		if (!newFile.exists() && oldFile.exists()) {
+			Locations.migrateWarps(oldFile.getAbsolutePath(), warpFile,
+					defWorld);
+		}
+
+		oldFile = new File(homeFile.substring(0, homeFile.length() - 2) + "txt");
+		newFile = new File(homeFile);
+		if (!newFile.exists() && oldFile.exists()) {
+			Locations.migrateWarps(oldFile.getAbsolutePath(), homeFile,
+					defWorld);
+		}
+
+		Locations.loadList(warpFile, Locations.warps, worldList, defWorld);
+		Locations.loadList(homeFile, Locations.homes, worldList, defWorld);
+		Locations.updateList();
+
+		pm.registerEvents(new pListener(), this);
 	}
 
 	public void OnEnableMessage() {
@@ -116,6 +180,7 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 	@Override
 	public void onEnable() {
 
+		WarpAndHome();
 		initialiseConfig();
 		RegisterCommands();
 		RegisterEvents();
@@ -128,6 +193,10 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 
 		OnDisableMessage();
 		saveConfig();
+		Locations.clear();
+		worldList.clear();
+		log.info(getDescription().getName() + " version "
+				+ getDescription().getVersion() + " is disabled");
 	}
 
 	// MOTD
@@ -190,11 +259,13 @@ public class Main extends JavaPlugin implements Listener, CommandExecutor {
 	public void ping(ServerListPingEvent event) {
 		event.setMotd(ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "*"
 				+ ChatColor.DARK_GRAY + "]" + ChatColor.AQUA
-				+ ChatColor.STRIKETHROUGH + "--------" + ChatColor.DARK_GRAY
-				+ "[" + ChatColor.GREEN + " TerraMC " + ChatColor.DARK_GRAY
-				+ "]" + ChatColor.AQUA + ChatColor.STRIKETHROUGH + "--------"
+				+ ChatColor.STRIKETHROUGH + "---------------"
+				+ ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + " TerraMC "
+				+ ChatColor.DARK_GRAY + "]" + ChatColor.AQUA
+				+ ChatColor.STRIKETHROUGH + "---------------"
 				+ ChatColor.DARK_GRAY + "[" + ChatColor.GREEN + "*"
-				+ ChatColor.DARK_GRAY + "]");
+				+ ChatColor.DARK_GRAY + "]" + ChatColor.WHITE + ChatColor.BOLD
+				+ "                Where The Fun Begins");
 	}
 
 	// SPAWN STUFF

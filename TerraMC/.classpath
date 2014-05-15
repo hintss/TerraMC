@@ -2,11 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="C:/Users/saad/Desktop/test server/craftbukkit-1.7.9-R0.1-20140503.225437-20.jar"/>
-	<classpathentry kind="lib" path="C:/Users/saad/Desktop/test server/plugins/BOSEconomy.jar"/>
-	<classpathentry kind="lib" path="C:/Users/saad/Desktop/test server/plugins/Multiverse-Core-2.5 (3).jar"/>
-	<classpathentry kind="lib" path="C:/Users/saad/Desktop/test server/plugins/ProtocolLib-3.3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/saad/Desktop/test server/plugins/Vault (4).jar"/>
-	<classpathentry kind="lib" path="C:/Users/saad/Desktop/test server/plugins/WorldEdit.jar"/>
+	<classpathentry kind="lib" path="C:/Users/saad/Desktop/test server/craftbukkit-1.7.9-R0.2-20140515.034335-1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/saad/Desktop/terramc test server/plugins/BOSEconomy.jar"/>
+	<classpathentry kind="lib" path="C:/Users/saad/Desktop/terramc test server/plugins/Multiverse-Core-2.5 (3).jar"/>
+	<classpathentry kind="lib" path="C:/Users/saad/Desktop/terramc test server/plugins/ProtocolLib-3.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/saad/Desktop/terramc test server/plugins/Vault (4).jar"/>
+	<classpathentry kind="lib" path="C:/Users/saad/Desktop/terramc test server/plugins/WorldEdit.jar"/>
+	<classpathentry kind="lib" path="C:/Users/saad/Desktop/terramc test server/plugins/WorldGuard.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

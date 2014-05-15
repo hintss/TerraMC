@@ -31,7 +31,6 @@ public class RPS implements CommandExecutor {
 						Random dicerock = new Random();
 						int maxrock = 3;
 						int minrock = 1;
-						int counterrock = minrock;
 						int numrock = 1 + dicerock.nextInt(maxrock);
 
 						if (numrock == 1) {
